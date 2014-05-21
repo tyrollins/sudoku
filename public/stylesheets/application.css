@@ -1,15 +1,37 @@
+body {
+  text-align: center;
+  font-family: Arial;
+}
+
 div.box, div.cell {
   display: inline-block;
 }
-.cell input {
-  width: 30px;
-  height: 30px;
+
+div.box {
+  outline: 3px solid black;
 }
+
+.cell input {
+  width: 40px;
+  height: 40px;
+  font-size: 25px;
+  text-align: center;
+  border: 1px solid gray;
+}
+
 #sudoku {
   font-size: 0;
   text-align: center;
 }
-body {
-  text-align: center;
-  font-family: Arial;
+
+#flash {
+  margin: 20px;
+}
+
+.incorrect {
+  background-color: yellow;
+}
+
+.value-provided {
+  background-color: #DDD;
 }
