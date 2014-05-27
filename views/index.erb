@@ -33,9 +33,21 @@ Simply fill in the blank spaces with the numbers 1 – 9. Every row, column and 
         <% end %>
       </div>
     <% end %>
-    <button class="button">Check solution</button>
+    <button>Check solution</button>
+    <button name="save" value="true">Save Game</button>
+    <button name="reset" value="true">Reset Game</button>
   </form>
 </div>
+<form action="/solution" method="get"><button>Show Solution</button></form>
+</div>
+
+<h3>New Game</h3>
+  <form action="/set" method="post">
+    <button name="difficulty" value="easy">Easy Puzzle</button>
+    <button name="difficulty" value="medium">Medium Puzzle</button>
+    <button name="difficulty" value="hard">Hard Puzzle</button>
+  </form>
+
 <div>
 Tyler Rollins
 </div>

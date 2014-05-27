@@ -19,15 +19,20 @@ def random_sudoku
   sudoku.to_s.chars
 end
 
-def puzzle(sudoku)
-  sudoku.map {|v| rand < 0.3 ? 0 : v }
+def puzzle(sudoku, difficulty)
+  sudoku.each_slice(3).to_a.each{|e|
+    e[[0,1,2].sample] = "0"
+    e[[0,1,2].sample] = "0" if difficulty == :medium || difficulty == :hard
+    e[[0,1,2].sample] = "0" if difficulty == :hard
+  }.flatten
 end
 
 def generate_new_puzzle_if_necessary
   return if session[:current_solution]
+  session[:difficulty] = session[:new_difficulty] || :medium
   sudoku = random_sudoku
   session[:solution] = sudoku
-  session[:puzzle] = puzzle(sudoku)
+  session[:puzzle] = puzzle(sudoku, session[:difficulty])
   session[:current_solution] = session[:puzzle]
 end
 
@@ -63,13 +68,23 @@ get '/' do
 end
 
 get '/solution' do
-  @puzzle = session[:solution]
+  redirect to("/") if !session[:current_solution]
+  @current_solution = session[:solution]
+  @solution = session[:solution]
+  @puzzle = session[:puzzle]
   erb :index
 end
 
 post '/' do
-  cells = box_order_to_row_order(params["cell"])
-  session[:current_solution] = cells.map{|value| value.to_i }.join
-  session[:check_solution] = true
+   cells = box_order_to_row_order(params["cell"])
+  session[:current_solution] = cells.map{|value| value.to_i}.join if !params[:reset]
+  session[:check_solution] = true if !params[:save] && !params[:reset]
+  session[:current_solution] = session[:puzzle] if params[:reset]
+  redirect to("/")
+end
+
+post '/set' do
+  session[:new_difficulty] = params[:difficulty].to_sym
+  session[:current_solution] = nil
   redirect to("/")
 end
