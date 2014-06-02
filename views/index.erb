@@ -1,5 +1,5 @@
 <h1>Sudoku</h1>
-<a href="#" data-reveal-id="myModal">How To Play</a>
+<button data-reveal-id="myModal">How To Play</button>
 
 <div id="myModal" class="reveal-modal" data-reveal>
   <h2>How to play Sudoku</h2>
@@ -16,6 +16,12 @@ Simply fill in the blank spaces with the numbers 1 – 9. Every row, column and 
 <div id="flash">
     <%= flash[:notice] %>
 </div>
+<h4>Difficulty</h4>
+<form action="/set" method="post">
+    <button class="button [tiny]" name="difficulty" value="easy">Easy</button>
+    <button class="button [tiny]" name="difficulty" value="medium">Medium</button>
+    <button  class="button [tiny]" name="difficulty" value="hard">Hard</button>
+  </form>
 <div id="sudoku">
   <form action="/" method="post">
     <% 3.times do |row| %>
@@ -40,13 +46,6 @@ Simply fill in the blank spaces with the numbers 1 – 9. Every row, column and 
 </div>
 <form action="/solution" method="get"><button>Show Solution</button></form>
 </div>
-
-<h3>New Game</h3>
-  <form action="/set" method="post">
-    <button name="difficulty" value="easy">Easy Puzzle</button>
-    <button name="difficulty" value="medium">Medium Puzzle</button>
-    <button name="difficulty" value="hard">Hard Puzzle</button>
-  </form>
 
 <div>
 Tyler Rollins
