@@ -20,5 +20,5 @@ Technologies
 To Do
 -----
 1. Clean up the styling
-2. Add Save / Load feature
+2. Add Save & Load feature
 
